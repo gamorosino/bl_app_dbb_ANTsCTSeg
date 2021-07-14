@@ -25,4 +25,5 @@ singularity exec -e docker://brainlife/ants:2.2.0.1 bash antsCorticalThicknessSe
 mkdir -p ${outputdir_1}
 
 cp ${outputdir_0}'/BrainSegmentation.nii.gz'	${outputdir_1}'/segmentation.nii.gz'
+cp './data/label.json' ${outputdir_1}
 
