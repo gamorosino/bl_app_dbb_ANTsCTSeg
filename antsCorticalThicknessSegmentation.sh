@@ -7,11 +7,11 @@ segment_dir=${4}"/"
 
 mkdir -p ${segment_dir}
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
-
+export ANTSPATH=/usr/lib/ants/
 for stage in 1 2 3;
 	do
 	
-	bash ${ANTSPATH}/antsCorticalThickness.sh -d 3 \
+	bash antsCorticalThickness.sh -d 3 \
 	-a ${t1} \
 	-e ${TEMPLATE_FOLDER}PTBP_T1_Head.nii.gz \
 	-m ${TEMPLATE_FOLDER}PTBP_T1_BrainCerebellumProbabilityMask.nii.gz \
