@@ -7,7 +7,7 @@ segment_dir=${4}"/"
 
 mkdir -p ${segment_dir}
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
-export ANTSPATH=/usr/lib/ants/
+#export ANTSPATH=/usr/lib/ants/
 for stage in 1 2 3;
 	do
 	
