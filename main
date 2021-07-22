@@ -18,7 +18,7 @@ outputdir_1=${PWD}"/segmentation"
 nthreads=10
 
 template_dir='./data/PTBP/'
-singularity exec -e docker://brainlife/ants:2.2.0.1 bash antsCorticalThicknessSegmentation.sh ${t1} ${template_dir} ${nthreads} ${outputdir_0}
+singularity exec -e docker://brainlife/ants:2.2.0-1bc bash antsCorticalThicknessSegmentation.sh ${t1} ${template_dir} ${nthreads} ${outputdir_0}
 
 # save outputfile 
 
