@@ -11,8 +11,9 @@ mask=$(jq -r .mask config.json)
 
 
 echo "t1: "${t1}
+echo "mask: "${mask}
 
- ( [ -z "${mask}" ]  || [  "${mask}" == "null" ] ) || { mask_opt="  ${mask} ";echo "mask: "${mask}; }
+ ( [ -z "${mask}" ]  || [  "${mask}" == "null" ] ) || { mask_opt="  ${mask} "; }
 
 outputdir_0=${PWD}"/outputdir"
 outputdir_1=${PWD}"/segmentation"
