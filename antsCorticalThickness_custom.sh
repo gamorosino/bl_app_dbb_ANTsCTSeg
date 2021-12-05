@@ -192,11 +192,15 @@ Optional arguments:
                                                 5: DiReCT cortical thickness
                                                 6: qc, quality control and summary measurements
 
-     -z:  Test / debug mode                     If > 0, runs a faster version of the script. Only for testing. Implies -u 0.
-                                                Requires single thread computation for complete reproducibility.
+	-z: Brain Mask								fullpaht of the brain mask								
+
+ 
 USAGE
     exit 1
 }
+
+#    -z:  Test / debug mode                     If > 0, runs a faster version of the script. Only for testing. Implies -u 0.
+#                                                Requires single thread computation for complete reproducibility.
 
 # Check outputs exist, runs at the end of the script
 # List of outputs is taken from the usage
