@@ -10,9 +10,7 @@ echo t1: ${1}
 echo template: ${2}
 echo threads ${3}
 echo output dir: ${4}
-echo brain mask: ${5} ;
-[ -z ${brain mask} ] || {  bmask_cmd="-z "${brain_mask}; }
-echo ${bmask_cmd}
+[ -z ${brain_mask} ] || {  bmask_cmd="-z "${brain_mask}; echo brain mask: ${5} ; }
 mkdir -p ${segment_dir}
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS
 #export ANTSPATH=/usr/lib/ants/
