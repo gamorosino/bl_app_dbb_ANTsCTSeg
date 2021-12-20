@@ -18,6 +18,6 @@ for i in $( ls ${testset_dir}/* -d ); do
 	mkdir -p ${output_dir_i}
 	output_seg=${output_dir_i}'/segmentation/segmentation.nii.gz'	
 	dice_score=${output_dir_i}'/dice_score.txt'
-	bash  ${SCRIPT_DIR}/main_local.sh  ${t1_i} ${mask_i}  ${output_dir_i} 
+	python  ${SCRIPT_DIR}/dice_score.py  ${output_seg} ${parc_i} ${dice_score}
 
 done

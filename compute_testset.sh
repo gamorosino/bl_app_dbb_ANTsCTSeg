@@ -80,14 +80,16 @@ array_stdev () {
 ########################################################################
 
 
-compute_script=${SCRIPT_DIR}/"compute_subjects.sh"
-disce_score_script=${SCRIPT_DIR}/"dice_score.sh"
+predict_script=${SCRIPT_DIR}/"compute_subjects.sh"
+disce_score_script=${SCRIPT_DIR}/"dice_score_subjects.sh"
 [ -z ${output_dir} ] && { output_dir=${testset_dir}'/bids/derivatives/bl_app_dbb_ANTsCTSeg/' ; }
 mkdir -p ${output_dir}
 
 singularity exec -e docker://brainlife/ants:2.2.0-1bc bash ${compute_script} ${testset_dir} ${output_dir}
 
 
+singularity exec -e  --nv docker://gamorosino/bl_app_dbb_disseg python ${SCRIPT_DIR}/dice_score.py  ${testset_dir} ${output_dir}
+	
 csv_file=${output_dir}'/dice_score.csv'
 csv_file_average=${output_dir}'/dice_score_average.csv'
 

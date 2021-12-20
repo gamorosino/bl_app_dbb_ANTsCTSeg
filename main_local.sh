@@ -24,7 +24,7 @@ outputdir_1=${outputdir}"/segmentation"
 nthreads=2
 
 template_dir=${SCRIPT_DIR}'/data/PTBP/'
-bash antsCorticalThicknessSegmentation.sh ${t1} ${template_dir} ${nthreads} ${outputdir_0} ${mask_opt}
+bash ${SCRIPT_DIR}'/antsCorticalThicknessSegmentation.sh' ${t1} ${template_dir} ${nthreads} ${outputdir_0} ${mask_opt}
 
 # save outputfile 
 
