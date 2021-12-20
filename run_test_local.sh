@@ -85,7 +85,7 @@ idx=0
 echo 'Category, CSF, GM, WM, DGM, Brainstem, Cerebellum' > ${csv_all}
 for tag in ${tag_list[@]}; do
 	idx=$(( $idx + 1 ))
-	bash ${SCRIPT_DIR}/compute_testset.sh ${download_dir}'/'${tag}'/'proj-${project_id} ${outputdir}'/'${tag}
+	bash ${SCRIPT_DIR}/compute_testset_local.sh ${download_dir}'/'${tag}'/'proj-${project_id} ${outputdir}'/'${tag}
 	dice_score_v=$( cat ${outputdir}'/'${tag}'/dice_score_average.csv' ) 
 	echo "dice score: "${dice_score_v}
 	echo ${tag},${dice_score_v}>> ${csv_all}

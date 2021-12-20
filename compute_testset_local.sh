@@ -6,9 +6,13 @@
 ########################################################################
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/"	
-project_id='60a14ca503bcad0ad27cada9'
-outputdir=$1
-download_dir=./'DBB_test'
+testset_dir=$1
+output_dir=$2
+
+if [ $# -lt 1 ]; then												
+		echo $0: "usage: "$( basename $0 )" <test_set_dir> [<output_dir>]"
+		return 1;		    
+fi 
 
 ########################################################################
 ## Functions
@@ -76,26 +80,51 @@ array_stdev () {
 ########################################################################
 
 
+compute_script=${SCRIPT_DIR}/"main_local.sh"
+disce_score_script=${SCRIPT_DIR}/"dice_score_local.sh"
+[ -z ${output_dir} ] && { output_dir=${testset_dir}'/bids/derivatives/bl_app_dbb_ANTsCTSeg/' ; }
+mkdir -p ${output_dir}
+for i in $( ls ${testset_dir}/* -d ); do
+	b_name_i=$( basename ${i} )
+	[ "${b_name_i}" == "bids" ] && { continue; }
+	[ -d ${i} ] || { continue; }
+	echo ${i}
+	t1_i=$( ls ${i}'/dt-neuro-anat-t1w.id-'*/'t1.nii.gz' )
+	mask_i=$( ls ${i}'/dt-neuro-mask.id-'*/'mask.nii.gz' )
+	parc_i=$( ls ${i}'/dt-neuro-parcellation-volume.id-'*/'parc.nii.gz' )
+	echo 't1': ${t1_i}
+	echo 'mask': ${mask_i}
+	echo 'parc': ${parc_i}
+	output_dir_i=${output_dir}'/'$( basename ${i}  )'/'
+	echo ${output_dir_i}
+	mkdir -p ${output_dir_i}
+	output_seg=${output_dir_i}'/segmentation/segmentation.nii.gz'	
+	[ $( exists $output_seg ) -eq 0 ] && { bash ${compute_script} ${t1_i} ${mask_i} ${output_dir_i}'/' ; }	
+	dice_score=${output_dir_i}'/dice_score.txt'
+	bash ${disce_score_script} ${output_seg} ${parc_i} ${dice_score}
+	cat ${dice_score}
+done
 
-bash ${SCRIPT_DIR}/download_testset.sh
-mkdir -p ${outputdir}
-tag_list=( ACC PFM MCDs HD )
-csv_all=${outputdir}'/average_dice_score.csv'
+csv_file=${output_dir}'/dice_score.csv'
+csv_file_average=${output_dir}'/dice_score_average.csv'
+
+echo "Subject_Id CSF GM WM DGM Brainstem Cerebellum"
+
+echo "Subject_Id CSF GM WM DGM Brainstem Cerebellum" > ${csv_file}
 idx=0
-echo 'Category, CSF, GM, WM, DGM, Brainstem, Cerebellum' > ${csv_all}
-for tag in ${tag_list[@]}; do
+for i in $( ls ${output_dir}/* -d ); do
 	idx=$(( $idx + 1 ))
-	bash ${SCRIPT_DIR}/compute_testset.sh ${download_dir}'/'${tag}'/'proj-${project_id} ${outputdir}'/'${tag}
-	dice_score_v=$( cat ${outputdir}'/'${tag}'/dice_score_average.csv' ) 
-	echo "dice score: "${dice_score_v}
-	echo ${tag},${dice_score_v}>> ${csv_all}
-	dice_score_v=( $( echo ${dice_score_v//','/' '} ) )
+	echo $( basename ${i} ) $( cat ${i}'/dice_score.txt' )
+	dice_score_v=( $( cat ${i}'/dice_score.txt' ) )
 	CSF_ds[$idx]=${dice_score_v[0]}
-	GM_ds[$idx]=${dice_score_v[2]}
-	WM_ds[$idx]=${dice_score_v[4]}
-	DGM_ds[$idx]=${dice_score_v[6]}
-	BS_ds[$idx]=${dice_score_v[8]}
-	Cereb_ds[$idx]=${dice_score_v[10]}
+	GM_ds[$idx]=${dice_score_v[1]}
+	WM_ds[$idx]=${dice_score_v[2]}
+	DGM_ds[$idx]=${dice_score_v[3]}
+	BS_ds[$idx]=${dice_score_v[4]}
+	Cereb_ds[$idx]=${dice_score_v[5]}
+	dss=$( cat ${i}'/dice_score.txt' )
+	echo $( basename ${i} ),${dss//' '/','}  >> ${csv_file}
+
 done
 
 CSF_mean=$( array_mean ${CSF_ds[@]} )
@@ -104,6 +133,10 @@ WM_mean=$( array_mean ${WM_ds[@]} )
 DGM_mean=$( array_mean ${DGM_ds[@]} )
 BS_mean=$( array_mean ${BS_ds[@]} )
 Cereb_mean=$( array_mean ${Cereb_ds[@]} )
+echo >> ${csv_file}
+echo Average,${CSF_mean},${GM_mean},${WM_mean},${DGM_mean},${BS_mean},${Cereb_mean} >> ${csv_file}
+
+
 
 CSF_stdev=$( array_stdev ${CSF_ds[@]} )
 GM_stdev=$( array_stdev ${GM_ds[@]} )
@@ -111,6 +144,7 @@ WM_stdev=$( array_stdev ${WM_ds[@]} )
 DGM_stdev=$( array_stdev ${DGM_ds[@]} )
 BS_stdev=$( array_stdev ${BS_ds[@]} )
 Cereb_stdev=$( array_stdev ${Cereb_ds[@]} )
+echo >> ${csv_file}
+echo STD,${CSF_stdev} ${GM_stdev} ${WM_stdev} ${DGM_stdev} ${BS_stdev} ${Cereb_stdev} >> ${csv_file}
 
-echo  "Global Average",${CSF_mean} "("${CSF_stdev}")",${GM_mean}  "("${GM_stdev}")",${WM_mean} "("${WM_stdev}")",${DGM_mean} "("${DGM_stdev}")",${BS_mean} "("${BS_stdev}")",${Cereb_mean} "("${Cereb_stdev}")"
-echo  "Global Average",${CSF_mean} "("${CSF_stdev}")",${GM_mean}  "("${GM_stdev}")",${WM_mean} "("${WM_stdev}")",${DGM_mean} "("${DGM_stdev}")",${BS_mean} "("${BS_stdev}")",${Cereb_mean} "("${Cereb_stdev}")" >> ${csv_all}
+echo  ${CSF_mean} "("${CSF_stdev}")",${GM_mean}  "("${GM_stdev}")",${WM_mean} "("${WM_stdev}")",${DGM_mean} "("${DGM_stdev}")",${BS_mean} "("${BS_stdev}")",${Cereb_mean} "("${Cereb_stdev}")" > ${csv_file_average}
