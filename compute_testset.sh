@@ -80,7 +80,7 @@ array_stdev () {
 ########################################################################
 
 
-predict_script=${SCRIPT_DIR}/"compute_subjects.sh"
+compute_script=${SCRIPT_DIR}/"compute_subjects.sh"
 disce_score_script=${SCRIPT_DIR}/"dice_score_subjects.sh"
 [ -z ${output_dir} ] && { output_dir=${testset_dir}'/bids/derivatives/bl_app_dbb_ANTsCTSeg/' ; }
 mkdir -p ${output_dir}
