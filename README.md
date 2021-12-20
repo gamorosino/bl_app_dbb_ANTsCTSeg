@@ -98,7 +98,7 @@ In order to use the script, the following software must be installed:
 
 ## Run test on DBB Distorted Brain testset
 
-You can run the tool to reproduce the results on the test set of DBB Distorted Brain Benchmark using the scritp with dockers:
+You can run the tool to reproduce the results on the test set of DBB Distorted Brain Benchmark using the script with dockers:
 ```
 run_test.sh <outputdir>
 ```
