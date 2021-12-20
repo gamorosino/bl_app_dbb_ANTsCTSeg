@@ -93,9 +93,6 @@ The files are stored in the working directory, under the folder _./segmentation_
 ####  Script Dependecies
 
 In order to use the script, the following software must be installed:
-ANTs, Advanced Normalization Tools (version >= 2.1.0)
-
-In order to use the script, the following software must be installed:
 * ANTs, Advanced Normalization Tools (version >= 2.1.0)
 
 
@@ -111,5 +108,5 @@ or with local softwares installed:
 run_test_local.sh <outputdir>
 ```
 
-The script performs the download of the published dataset of the DBB benchmark (https://doi.org/10.25663/brainlife.pub.24) and predict the segmentation volume for each subjects. 
+The script performs the download of the published dataset of the DBB benchmark (https://doi.org/10.25663/brainlife.pub.24) and computes the segmentation volume for each subjects. 
 Furthermore, compute the dice score using the published groundtruth and creates the final _csv_ file, _average_dice_score.csv_, reporting the dice score for each label of the segmented volumes.
