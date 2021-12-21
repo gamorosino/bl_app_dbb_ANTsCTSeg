@@ -7,8 +7,14 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/"	
 project_id='60a14ca503bcad0ad27cada9'
-outputdir=$1
-download_dir=./'DBB_test'
+download_dir=$1
+outputdir=$2 #./'DBB_test'
+
+	if [ $# -lt 2 ]; then												
+		echo $0: "usage: "$( basename $0 )" <download_dir.ext> <outputdir>"
+		return 1;		    
+	fi 
+	
 
 ########################################################################
 ## Functions
@@ -76,8 +82,8 @@ array_stdev () {
 ########################################################################
 
 
-
-bash ${SCRIPT_DIR}/download_testset.sh
+mkdir -p ${download_dir}	
+bash ${SCRIPT_DIR}/download_testset.sh ${download_dir}
 mkdir -p ${outputdir}
 tag_list=( ACC PFM MCDs HD )
 csv_all=${outputdir}'/average_dice_score.csv'

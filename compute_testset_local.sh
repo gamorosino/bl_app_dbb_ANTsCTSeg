@@ -99,7 +99,8 @@ for i in $( ls ${testset_dir}/* -d ); do
 	echo ${output_dir_i}
 	mkdir -p ${output_dir_i}
 	output_seg=${output_dir_i}'/segmentation/segmentation.nii.gz'	
-	[ $( exists $output_seg ) -eq 0 ] && { bash ${compute_script} ${t1_i} ${mask_i} ${output_dir_i}'/' ; }	
+	[ $( exists $output_seg ) -eq 0 ] && { bash ${compute_script} ${t1_i} ${mask_i} ${output_dir_i}'/' ; }	\
+										|| { echo "Brain tissue segmentation already done for "${b_name_i} ; }
 	dice_score=${output_dir_i}'/dice_score.txt'
 	bash ${disce_score_script} ${output_seg} ${parc_i} ${dice_score}
 	cat ${dice_score}
