@@ -87,7 +87,7 @@ mkdir -p ${outputdir}
 tag_list=( ACC PFM MCDs HD )
 csv_all=${outputdir}'/average_dice_score.csv'
 idx=0
-echo 'Category, CSF, GM, WM, DGM, Brainstem, Cerebellum' > ${csv_all}
+echo ' , CSF, GM, WM, DGM, Brainstem, Cerebellum' > ${csv_all}
 for tag in ${tag_list[@]}; do
 	idx=$(( $idx + 1 ))
 	bash ${SCRIPT_DIR}/compute_testset_local.sh ${download_dir}'/'${tag}'/'proj-${project_id} ${outputdir}'/'${tag}

@@ -114,6 +114,8 @@ echo "Subject_Id CSF GM WM DGM Brainstem Cerebellum"
 echo "Subject_Id CSF GM WM DGM Brainstem Cerebellum" > ${csv_file}
 idx=0
 for i in $( ls ${output_dir}/* -d ); do
+	[ "${b_name_i}" == "bids" ] && { continue; }
+	[ -d ${i} ] || { continue; }
 	idx=$(( $idx + 1 ))
 	echo $( basename ${i} ) $( cat ${i}'/dice_score.txt' )
 	dice_score_v=( $( cat ${i}'/dice_score.txt' ) )
