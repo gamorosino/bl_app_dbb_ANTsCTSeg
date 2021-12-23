@@ -102,7 +102,7 @@ In order to use the script, the following software must be installed:
 * ANTs, Advanced Normalization Tools (version >= 2.1.0)
 
 
-## Run test on DBB Distorted Brain Benchmark testset
+## Run test on DBB Distorted Brain Benchmark test set
 
 You can run the tool to reproduce the results on the test set of DBB Distorted Brain Benchmark using the script with dockers:
 ```
