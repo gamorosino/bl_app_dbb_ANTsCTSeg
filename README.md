@@ -91,7 +91,7 @@ main_local.sh <t1.ext> <mask.ext> [<outputdir>]
 
 #### Output
 
-The output of bl_app_dbb_DisSeg are the predicted segmentation volume of the 3D U-Net and a json file describing the labels of the segmented volume.         
+The outputs of bl_app_dbb_DisSeg are the predicted segmentation volume of the 3D U-Net and a json file describing the labels of the segmented volume.         
 
 The files are stored in the working directory, under the folder _./segmentation_  with the name _segmentation.nii.gz_ , for the semgnetaion volume and _label.json_, for the json file.
 
