@@ -20,7 +20,13 @@ You can see _DBB_ANTsCortThickSeg_ currently registered on Brainlife. Find the A
 
 Brainlife CLI could be installed on UNIX/Linux-based system following the instruction reported in https://brainlife.io/docs/cli/install/.
 
-you can run the App with CLI as follow:
+The first time you use the _BrainLife_ _CLI_ on a machine, you need to log in with the brainlife.io credentials
+
+```
+bl login
+```
+
+You can run the App with CLI as follow:
 ```
 bl app run --id   60ef07acddc2dff22965f239  --project <project_id> --input t1:<t1_object_id> --input mask:<mask_object_id> 
 ```
