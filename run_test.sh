@@ -118,5 +118,8 @@ DGM_stdev=$( array_stdev ${DGM_ds[@]} )
 BS_stdev=$( array_stdev ${BS_ds[@]} )
 Cereb_stdev=$( array_stdev ${Cereb_ds[@]} )
 
-echo  "Global Average",${CSF_mean} "("${CSF_stdev}")",${GM_mean}  "("${GM_stdev}")",${WM_mean} "("${WM_stdev}")",${DGM_mean} "("${DGM_stdev}")",${BS_mean} "("${BS_stdev}")",${Cereb_mean} "("${Cereb_stdev}")"
+echo ''
 echo  "Global Average",${CSF_mean} "("${CSF_stdev}")",${GM_mean}  "("${GM_stdev}")",${WM_mean} "("${WM_stdev}")",${DGM_mean} "("${DGM_stdev}")",${BS_mean} "("${BS_stdev}")",${Cereb_mean} "("${Cereb_stdev}")" >> ${csv_all}
+cat ${csv_all}
+echo ''
+echo "The average dice score for each category is saved as: "${csv_all}
