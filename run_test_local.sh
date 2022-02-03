@@ -12,7 +12,7 @@ outputdir=$2 #./'DBB_test'
 
 	if [ $# -lt 2 ]; then												
 		echo $0: "usage: "$( basename $0 )" <download_dir.ext> <output_dir>"
-		return 1;		    
+		exit 1;		    
 	fi 
 
 ########################################################################
