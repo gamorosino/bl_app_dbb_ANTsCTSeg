@@ -1,10 +1,21 @@
 # bl_app_dbb_AntsCTSeg
 
-This application implement a custumed version of [_AntsCorticalThickness.sh_ script](https://github.com/ANTsX/ANTs/blob/master/Scripts/antsCorticalThickness.sh), using [PTBP priors](https://figshare.com/articles/dataset/The_Pediatric_Template_of_Brain_Perfusion_PTBP_/923555)  and  a brain mask  to obtain the brain tissue segmentation.
+This application implements a custumed version of [_AntsCorticalThickness.sh_ ](https://github.com/ANTsX/ANTs/blob/master/Scripts/antsCorticalThickness.sh) script of the ANTs toolkit [(Avants et al., 2011)](https://doi.org/10.1016/j.neuroimage.2010.09.025
+), using [PTBP priors](https://figshare.com/articles/dataset/The_Pediatric_Template_of_Brain_Perfusion_PTBP_/923555)  and  a brain mask  to obtain the brain tissue segmentation.
 
 ### Author
 
     Gabriele Amorosino (gamorosino@fbk.eu)
+
+### Citation
+
+If you use this code for your research please cite:
+
+```
+Gabriele Amorosino, Denis Peruzzo, Daniela Redaelli, Emanuele Olivetti, Filippo Arrigoni, Paolo Avesani,
+DBB - A Distorted Brain Benchmark for Automatic Tissue Segmentation in Paediatric Patients,
+NeuroImage, 2022, 119486, ISSN 1053-8119, https://doi.org/10.1016/j.neuroimage.2022.119486.
+```
 
 ## Running the Brainlife App
 
